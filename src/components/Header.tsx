@@ -5,11 +5,13 @@ import { StateType } from "../redux/types";
 function Header() {
   const { user } = useSelector((state: StateType) => state);
   const { name, email } = user;
+
+  // User's name and email must not be empty string
   const isLoggedIn = name && email;
 
   return (
     <nav className="main-nav">
-      <NavLink className="main-nav-logo" to="./index.html">
+      <NavLink className="main-nav-logo" to="">
         <img
           className="main-nav-logo-image"
           src="./img/argentBankLogo.png"
@@ -19,13 +21,13 @@ function Header() {
       </NavLink>
       <div>
         {isLoggedIn && (
-          <NavLink className="main-nav-item" to="./user.html">
+          <NavLink className="main-nav-item" to="/user">
             <i className="fa fa-user-circle"></i>
             {name}
           </NavLink>
         )}
 
-        <NavLink className="main-nav-item" to="./sign-in.html">
+        <NavLink className="main-nav-item" to="/sign-in">
           <i className="fa fa-user-circle"></i>
           Sign In
         </NavLink>

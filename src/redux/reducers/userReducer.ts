@@ -9,8 +9,8 @@ type Action = {
 };
 
 const initialState = {
-  name: "Thomas",
-  email: "thomas@email.com",
+  name: "",
+  email: "",
 };
 
 export const userReducer = (state: State = initialState, action: Action) => {
