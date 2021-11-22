@@ -27,7 +27,7 @@ function Header() {
           </NavLink>
         )}
 
-        <NavLink className="main-nav-item" to="/sign-in">
+        <NavLink className="main-nav-item" to="/login">
           <i className="fa fa-user-circle"></i>
           Sign In
         </NavLink>
