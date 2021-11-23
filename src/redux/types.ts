@@ -13,6 +13,7 @@ export type AuthState = {
 // Profile reducer types
 type User = {
   firstName: string;
+  lastName: string;
   email: string;
   id: string;
 };
@@ -29,6 +30,7 @@ export type ProfileAction = {
   type: string;
   payload?: {
     firstName: string;
+    lastName: string;
     email: string;
     id: string;
   };

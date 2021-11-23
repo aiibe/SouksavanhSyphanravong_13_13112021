@@ -19,7 +19,7 @@ function Header() {
       <div>
         {token ? (
           <>
-            <NavLink className="main-nav-item" to="/user">
+            <NavLink className="main-nav-item" to="/profile">
               <i className="fa fa-user-circle"></i>
               {profile?.firstName}
             </NavLink>
