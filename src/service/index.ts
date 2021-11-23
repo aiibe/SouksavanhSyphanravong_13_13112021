@@ -1,3 +1,5 @@
+import { ProfileState } from "../redux/types";
+
 const API_URL = "http://localhost:3001/api/v1";
 
 type Token = {
@@ -24,7 +26,7 @@ const authenticateUser = async (
   return { error: message };
 };
 
-const getUserProfile = async (token: string): Promise<any> => {
+const getUserProfile = async (token: string): Promise<ProfileState> => {
   const response = await fetch(API_URL + "/user/profile", {
     method: "POST",
     headers: {
@@ -36,6 +38,8 @@ const getUserProfile = async (token: string): Promise<any> => {
   const { status, message, body } = await response.json();
 
   if (status === 200) return { ...body };
+
+  return null;
 };
 
 export default { authenticateUser, getUserProfile };

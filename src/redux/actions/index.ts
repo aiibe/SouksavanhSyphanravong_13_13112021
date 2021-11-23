@@ -32,14 +32,15 @@ export const fetchToken = (email: string, password: string) => {
 
       // Fetch user profile
       const profile = await Service.getUserProfile(token);
-      const { err, firstName, email, id } = profile;
 
-      if (err) return dispatch({ type: ActionType.PROFILE_FAILED });
-
-      dispatch({
-        type: ActionType.PROFILE_SUCCESS,
-        payload: { firstName, email, id },
-      });
+      dispatch(
+        !profile
+          ? { type: ActionType.PROFILE_FAILED }
+          : {
+              type: ActionType.PROFILE_SUCCESS,
+              payload: profile,
+            }
+      );
     }
   };
 };
