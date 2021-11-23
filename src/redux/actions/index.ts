@@ -1,42 +1,45 @@
 import { Dispatch } from "redux";
-import { LoginAction } from "../types";
+import Service from "../../service";
+import { LoginAction, ProfileAction } from "../types";
 import { ActionType } from "./action-types";
+
+type Token = {
+  token?: string;
+  error?: string;
+};
 
 // Actions creators
 export const fetchToken = (email: string, password: string) => {
-  return async (dispatch: Dispatch<LoginAction>) => {
-    try {
-      // Login user for token
-      const response = await fetch("http://localhost:3001/api/v1/user/login", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+  return async (dispatch: Dispatch<LoginAction | ProfileAction>) => {
+    // Login user for token
+    const data = await Service.authenticateUser(email, password);
+    const { error, token }: Token = data;
+
+    // Invalid password
+    if (error)
+      return dispatch({
+        type: ActionType.LOGIN_FAILED,
+        payload: error,
       });
 
-      // Response
-      const { status, message, body } = await response.json();
+    // Valid credentials
+    if (token) {
+      // Set token
+      dispatch({
+        type: ActionType.LOGIN_SUCCESS,
+        payload: token,
+      });
 
-      // Invalid password
-      if (status === 400) {
-        return dispatch({
-          type: ActionType.LOGIN_FAILED,
-          payload: message,
-        });
-      }
+      // Fetch user profile
+      const profile = await Service.getUserProfile(token);
+      const { err, firstName, email, id } = profile;
 
-      // Valid
-      if (status === 200) {
-        const { token } = body;
-        return dispatch({
-          type: ActionType.LOGIN_SUCCESS,
-          payload: token,
-        });
-      }
-    } catch (error) {
-      console.log(error);
+      if (err) return dispatch({ type: ActionType.PROFILE_FAILED });
+
+      dispatch({
+        type: ActionType.PROFILE_SUCCESS,
+        payload: { firstName, email, id },
+      });
     }
   };
 };

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { StateType } from "../redux/types";
 
 function Header() {
-  const { auth } = useSelector((state: StateType) => state);
+  const { auth, profile } = useSelector((state: StateType) => state);
   const { token } = auth;
 
   return (
@@ -18,10 +18,16 @@ function Header() {
       </NavLink>
       <div>
         {token ? (
-          <NavLink className="main-nav-item" to="/user">
-            <i className="fa fa-user-circle"></i>
-            "Username"
-          </NavLink>
+          <>
+            <NavLink className="main-nav-item" to="/user">
+              <i className="fa fa-user-circle"></i>
+              {profile?.firstName}
+            </NavLink>
+            <NavLink className="main-nav-item" to="/logout">
+              <i className="fa fa-sign-out" />
+              Sign Out
+            </NavLink>
+          </>
         ) : (
           <NavLink className="main-nav-item" to="/login">
             <i className="fa fa-user-circle"></i>
