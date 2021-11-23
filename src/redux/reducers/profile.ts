@@ -6,6 +6,8 @@ export const profileReducer = (
   action: ProfileAction
 ) => {
   switch (action.type) {
+    case ActionType.SIGN_OUT:
+      return null;
     case ActionType.PROFILE_FAILED:
       return null;
     case ActionType.PROFILE_SUCCESS:

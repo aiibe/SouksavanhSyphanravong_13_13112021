@@ -1,10 +1,18 @@
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { signOut } from "../redux/actions";
 import { StateType } from "../redux/types";
 
 function Header() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { auth, profile } = useSelector((state: StateType) => state);
   const { token } = auth;
+
+  const handleSignOut = () => {
+    dispatch(signOut());
+    navigate("/");
+  };
 
   return (
     <nav className="main-nav">
@@ -23,10 +31,10 @@ function Header() {
               <i className="fa fa-user-circle"></i>
               {profile?.firstName}
             </NavLink>
-            <NavLink className="main-nav-item" to="/logout">
+            <span className="main-nav-item" onClick={handleSignOut}>
               <i className="fa fa-sign-out" />
               Sign Out
-            </NavLink>
+            </span>
           </>
         ) : (
           <NavLink className="main-nav-item" to="/login">

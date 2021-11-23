@@ -12,6 +12,8 @@ export const authReducer = (
   action: LoginAction
 ) => {
   switch (action.type) {
+    case ActionType.SIGN_OUT:
+      return { ...initState };
     case ActionType.LOGIN_FAILED:
       return {
         token: "",

@@ -44,3 +44,8 @@ export const fetchToken = (email: string, password: string) => {
     }
   };
 };
+
+export const signOut = () => {
+  return (dispatch: Dispatch<LoginAction>) =>
+    dispatch({ type: ActionType.SIGN_OUT });
+};
