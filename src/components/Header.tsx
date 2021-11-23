@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import { StateType } from "../redux/types";
 
 function Header() {
-  const { token } = useSelector((state: StateType) => state);
+  const { auth } = useSelector((state: StateType) => state);
+  const { token } = auth;
 
   return (
     <nav className="main-nav">
@@ -16,17 +17,17 @@ function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
       <div>
-        {token && (
+        {token ? (
           <NavLink className="main-nav-item" to="/user">
             <i className="fa fa-user-circle"></i>
             "Username"
           </NavLink>
+        ) : (
+          <NavLink className="main-nav-item" to="/login">
+            <i className="fa fa-user-circle"></i>
+            Sign In
+          </NavLink>
         )}
-
-        <NavLink className="main-nav-item" to="/login">
-          <i className="fa fa-user-circle"></i>
-          Sign In
-        </NavLink>
       </div>
     </nav>
   );
