@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { signOut } from "../redux/actions";
@@ -9,7 +10,8 @@ function Header() {
   const { auth, profile } = useSelector((state: StateType) => state);
   const { token } = auth;
 
-  const handleSignOut = () => {
+  const handleSignOut = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
     dispatch(signOut());
     navigate("/");
   };
@@ -31,10 +33,14 @@ function Header() {
               <i className="fa fa-user-circle"></i>
               {profile?.firstName}
             </NavLink>
-            <span className="main-nav-item" onClick={handleSignOut}>
+            <a
+              className="main-nav-item"
+              onClick={handleSignOut}
+              style={{ cursor: "pointer" }}
+            >
               <i className="fa fa-sign-out" />
               Sign Out
-            </span>
+            </a>
           </>
         ) : (
           <NavLink className="main-nav-item" to="/login">
