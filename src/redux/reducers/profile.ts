@@ -12,6 +12,10 @@ export const profileReducer = (
       return null;
     case ActionType.PROFILE_SUCCESS:
       return action.payload;
+    case ActionType.UPDATE_PROFILE_SUCCESS:
+      return action.payload;
+    case ActionType.UPDATE_PROFILE_FAILED:
+      return state;
     default:
       return state;
   }

@@ -10,7 +10,7 @@ const initState = {
 export const authReducer = (
   state: AuthState = initState,
   action: LoginAction
-) => {
+): AuthState => {
   switch (action.type) {
     case ActionType.SIGN_OUT:
       return { ...initState };

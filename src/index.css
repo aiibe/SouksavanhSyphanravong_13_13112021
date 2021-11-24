@@ -260,9 +260,16 @@ body,
   padding: 10px;
 }
 
-.header {
+.header,
+.header span {
   color: #fff;
   margin-bottom: 2rem;
+}
+
+.header span {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .transaction-button {

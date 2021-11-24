@@ -22,7 +22,7 @@ export type ProfileState = User | null;
 // Login Action
 export type LoginAction = {
   type: string;
-  payload?: string;
+  payload: string;
 };
 
 // Profile Action

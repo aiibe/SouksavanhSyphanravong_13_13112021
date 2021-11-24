@@ -42,4 +42,25 @@ const getUserProfile = async (token: string): Promise<ProfileState> => {
   return null;
 };
 
-export default { authenticateUser, getUserProfile };
+const updateUserProfile = async (
+  token: string,
+  firstName: string,
+  lastName: string
+): Promise<ProfileState> => {
+  const response = await fetch(API_URL + "/user/profile", {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ firstName, lastName }),
+  });
+  const { status, message, body } = await response.json();
+
+  if (status === 200) return { ...body };
+
+  return null;
+};
+
+export default { authenticateUser, getUserProfile, updateUserProfile };

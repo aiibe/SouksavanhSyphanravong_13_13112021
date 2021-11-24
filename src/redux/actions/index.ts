@@ -47,5 +47,24 @@ export const fetchToken = (email: string, password: string) => {
 
 export const signOut = () => {
   return (dispatch: Dispatch<LoginAction>) =>
-    dispatch({ type: ActionType.SIGN_OUT });
+    dispatch({ type: ActionType.SIGN_OUT, payload: "" });
+};
+
+export const updateProfile = (
+  token: string,
+  firstName: string,
+  lastName: string
+) => {
+  return async (dispatch: Dispatch<ProfileAction>) => {
+    const profile = await Service.updateUserProfile(token, firstName, lastName);
+
+    dispatch(
+      !profile
+        ? { type: ActionType.UPDATE_PROFILE_FAILED }
+        : {
+            type: ActionType.UPDATE_PROFILE_SUCCESS,
+            payload: profile,
+          }
+    );
+  };
 };

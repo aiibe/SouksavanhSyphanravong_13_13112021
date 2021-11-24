@@ -1,18 +1,32 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import EditName from "../components/EditName";
 import { StateType } from "../redux/types";
 
 function Profile() {
+  const [editing, setEditing] = useState(false);
   const { profile } = useSelector((state: StateType) => state);
 
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          {profile?.firstName} {profile?.lastName}!
-        </h1>
-        <button className="edit-button">Edit Name</button>
+        <h1>Welcome back</h1>
+        {editing ? (
+          <EditName
+            firstName={profile?.firstName}
+            lastName={profile?.lastName}
+            onClose={() => setEditing(false)}
+          />
+        ) : (
+          <>
+            <span>
+              {profile?.firstName} {profile?.lastName}!
+            </span>
+            <button className="edit-button" onClick={() => setEditing(true)}>
+              Edit Name
+            </button>
+          </>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
