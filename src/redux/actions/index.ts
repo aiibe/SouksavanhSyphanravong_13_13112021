@@ -8,7 +8,7 @@ type Token = {
   error?: string;
 };
 
-// Actions creators
+// Fetch user token and basic info
 export const fetchToken = (email: string, password: string) => {
   return async (dispatch: Dispatch<LoginAction | ProfileAction>) => {
     // Login user for token
@@ -45,11 +45,13 @@ export const fetchToken = (email: string, password: string) => {
   };
 };
 
+// Sign out user
 export const signOut = () => {
   return (dispatch: Dispatch<LoginAction>) =>
     dispatch({ type: ActionType.SIGN_OUT, payload: "" });
 };
 
+// Update user profile
 export const updateProfile = (
   token: string,
   firstName: string,

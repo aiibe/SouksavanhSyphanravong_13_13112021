@@ -1,5 +1,5 @@
 import { ActionType } from "../actions/action-types";
-import { LoginAction, AuthState } from "../types";
+import { AuthState, LoginAction } from "../types";
 
 const initState = {
   token: "",
