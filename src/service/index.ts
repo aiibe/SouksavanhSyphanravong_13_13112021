@@ -7,6 +7,7 @@ type Token = {
   error?: string;
 };
 
+// Authenticate user for token
 const authenticateUser = async (
   email: string,
   password: string
@@ -26,6 +27,7 @@ const authenticateUser = async (
   return { error: message };
 };
 
+// Get user info
 const getUserProfile = async (token: string): Promise<ProfileState> => {
   const response = await fetch(API_URL + "/user/profile", {
     method: "POST",
@@ -42,6 +44,7 @@ const getUserProfile = async (token: string): Promise<ProfileState> => {
   return null;
 };
 
+// Update user info
 const updateUserProfile = async (
   token: string,
   firstName: string,

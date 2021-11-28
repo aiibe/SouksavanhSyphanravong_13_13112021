@@ -27,10 +27,11 @@ function EditName({ firstName, lastName, onClose }: PropTypes) {
 
   useEffect(() => {
     if (firstName && lastName) {
+      // Auto batch updated fields
       setFirst(firstName);
       setLast(lastName);
     }
-  }, [firstName, lastName]);
+  }, []);
 
   return (
     <>
